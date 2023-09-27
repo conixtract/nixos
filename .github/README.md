@@ -1,0 +1,75 @@
+<div align="center">
+  <h1> 44Bars </h1>
+</div>
+<div align="center">
+
+![OS](https://img.shields.io/badge/OS-NixOS-%230E9DF1?style=for-the-badge)
+![WM](https://img.shields.io/badge/wm-i3wm-green?style=for-the-badge)
+![Bar](https://img.shields.io/badge/Bar-Polybar-%23FF007E?style=for-the-badge)
+![Menu](https://img.shields.io/badge/Menu-Rofi-%23FF6D00?style=for-the-badge)
+
+![Terminal](https://img.shields.io/badge/Terminal-Kitty-%2300DC8D?style=for-the-badge)
+![Composer](https://img.shields.io/badge/Comp-picom-%239400FF?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/Editor-VSCODE-%23FFDC00?style=for-the-badge)
+
+<img src="../home/shared/Wallpaper/Bobby_Tarantino.jpeg" alt="showcase" width="300" height=auto>
+
+</div>
+
+## Nix
+```
+home/
+    pk/
+        config/
+        home.nix
+        ...
+    shared/
+        ...
+hosts/
+    44Bars/
+        hardware-configuration.nix
+        configuration.nix
+    shared/
+        default.nix
+```
+This is the general structure of my dotfiles.
+
+1. hosts/
+- contains machine specific configurations
+- `44Bars` contains the configurations for my surface
+- `shared` contains configs which don't change between machines
+
+2. home/
+- contains home-manager(user specific) configurations
+- `shared` contains wallpapers, color schemes, scripts etc.
+
+## Screenshots
+| <b>Launch Menu</b>                                                                              |
+| ------------------------------------------------------------------------------------------------------------------ |
+| <a href="#--------"><img src="screenshots/rofi_menu.png" alt="bottom panel preview"></a>                    |
+
+
+## Installation
+Don't
+
+just ... just don't
+
+## To-DO
+
+- [ ] pijulius picom animations
+- [ ] sys menu
+- [ ] lock screen
+- [ ] polybar
+
+## Credits
+> **Note**
+>
+> I do apologies for missing credits as I started documenting after I already had a basic setup.
+
+- [chadcat](https://github.com/chadcat7)
+    - style of readme
+    - folder structure
+- [Teenarp](https://github.com/Teenarp2003)
+    - polybar
+- [Ronnie Nissan](https://github.com/ronniedroid)
+    - Wall-d
