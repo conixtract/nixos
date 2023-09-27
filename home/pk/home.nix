@@ -49,7 +49,6 @@ in
             discord
             dolphin
             flameshot
-            polybar
         ];
     };
 

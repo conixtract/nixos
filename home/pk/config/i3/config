@@ -43,15 +43,15 @@ bindsym XF86MonBrightnessUp exec brightnessctl s +10% && pkill -RTMIN+1 i3blocks
 bindsym XF86MonBrightnessDown exec brightnessctl s 10%- && pkill -RTMIN+1 i3blocks # decrease screen brightness
 
 #volume
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && pkill -RTMIN+2 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && pkill -RTMIN+2 i3blocks
+set $refresh_volume polybar-msg action volume hook 0
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_volume
 # gradular volume control
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && pkill -RTMIN+2 i3blocks
-bindsym $mod+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && pkill -RTMIN+2 i3blocks
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && $refresh_volume
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && $refresh_volume
 # mute
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+2 i3blocks
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+2 i3blocks
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_volume
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_volume
 
 bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
@@ -208,15 +208,15 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-set $sysmenu "System: [l]ock  [p]oweroff  re[b]oot"
-bindsym $mod+Escape mode $sysmenu
-mode $sysmenu {
-    bindsym l         exec "i3lock -e -i ~/nixos/home/shared/Wallpaper/astronaut.png"
-    bindsym p         exec poweroff
-    bindsym b         exec reboot
-    bindsym Return    mode "default"
-    bindsym Escape    mode "default"
-}
+#set $sysmenu "System: [l]ock  [p]oweroff  re[b]oot"
+#bindsym $mod+Escape mode $sysmenu
+#mode $sysmenu {
+#    bindsym l         exec "i3lock -e -i ~/nixos/home/shared/Wallpaper/astronaut.png"
+#    bindsym p         exec poweroff
+#    bindsym b         exec reboot
+#    bindsym Return    mode "default"
+#    bindsym Escape    mode "default"
+#}
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -227,7 +227,10 @@ bindsym $mod+d exec --no-startup-id "rofi -show"
 
 # keybinding to lock screen
 bindsym $mod+Control+l exec "i3lock -e -i ~/nixos/home/shared/Wallpaper/astronaut.png"
-
+#keybinding to shut down
+bindsym $mod+Control+p poweroff
+#keybinding to reboot
+bindsym $mod+Control+b reboot
 
 ##############################################
 #               --i3bar--
@@ -235,10 +238,10 @@ bindsym $mod+Control+l exec "i3lock -e -i ~/nixos/home/shared/Wallpaper/astronau
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command SCRIPT_DIR=~/.config/i3/i3blocks/ i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
-        position top
-}
+#bar {
+        #status_command SCRIPT_DIR=~/.config/i3/i3blocks/ i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
+        #position top
+#}
 
 ##############################################
 #               --Startup--
@@ -249,6 +252,7 @@ bar {
 exec ~/.fehbg
 exec_always --no-startup-id keepassxc
 exec_always --no-startup-id picom
+exec_always --no-startup-id ~/nixos/home/pk/config/polybar/launch.sh
 
 # focus any window on app start
 for_window [all] focus
