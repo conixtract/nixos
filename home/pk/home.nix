@@ -13,7 +13,6 @@ in
         #../shared
         # import configurations
         #(import ./config/i3/default.nix)       
-        #(import ./config/i3blocks/default.nix)
         #(import ./config/kitty/default.nix)
         (import ./config/vscode/default.nix)
         (import ./config/picom/default.nix)

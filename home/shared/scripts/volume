@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+MUTE=$(amixer get Master | grep -E -o -m 1 "\[\w*\]" | grep -o "\w*")
+if [[ "$MUTE" = "off" ]] ; then
+    volume=""
+else
+    volume=$(amixer get Master | grep -E -o -m 1 "[[:digit:]]*%")
+fi
+
+echo "$volume"

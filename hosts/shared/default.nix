@@ -44,8 +44,8 @@
     };
 
     fonts.packages = with pkgs; [
-        font-awesome
         (nerdfonts.override { fonts = [ "Iosevka" "CascadiaCode" "JetBrainsMono" ]; })
+        font-awesome
     ];
 
     environment.systemPackages = with pkgs; [
