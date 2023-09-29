@@ -19,8 +19,6 @@ in
         (import ./config/rofi/default.nix { inherit config pkgs colors; })
         (import ./config/polybar/default.nix)
         #"${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
-
-
     ];
 
     # vs code ssh modul fix 
@@ -46,8 +44,9 @@ in
             maestral-gui
             keepassxc
             discord
-            dolphin
             flameshot
+            cmake
+            gnumake
         ];
     };
 

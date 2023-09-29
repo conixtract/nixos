@@ -228,9 +228,9 @@ bindsym $mod+d exec --no-startup-id "rofi -show"
 # keybinding to lock screen
 bindsym $mod+Control+l exec "i3lock -e -i ~/nixos/home/shared/Wallpaper/astronaut.png"
 #keybinding to shut down
-bindsym $mod+Control+p poweroff
+bindsym $mod+Control+p exec poweroff
 #keybinding to reboot
-bindsym $mod+Control+b reboot
+bindsym $mod+Control+b exec reboot
 
 ##############################################
 #               --i3bar--
@@ -258,7 +258,7 @@ exec_always --no-startup-id ~/nixos/home/pk/config/polybar/launch.sh
 for_window [all] focus
 # move container to specific workspace on app start
 # use xprop in terminal an click on window to get window class
-assign [class="(?i)firefox"] $ws1
+assign [class="(?i)chromium"] $ws1
 assign [class="(?i)Code"] $ws2
 assign [class="(?i)kitty"] $ws3
 assign [class="(?i)obsidian"] $ws4
