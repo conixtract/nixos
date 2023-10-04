@@ -59,7 +59,9 @@ just ... just don't
 - [ ] pijulius picom animations
 - [ ] sys menu
 - [ ] lock screen
-- [ ] polybar
+- [x] get polybar running
+- [ ] pywall integration
+- [ ] calendar widget with google calendar sync
 
 ## Credits
 > **Note**

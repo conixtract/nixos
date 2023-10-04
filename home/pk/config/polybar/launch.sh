@@ -9,3 +9,4 @@ while pgrep -x polybar >/dev/null; do sleep 1; done
 
 # Launch
 polybar top 
+polybar-msg action volume hook 0

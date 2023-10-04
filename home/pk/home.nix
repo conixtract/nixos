@@ -33,7 +33,6 @@ in
         };
     
         packages = with pkgs; [
-            gcc
             lm_sensors # used for i3blocks temperatur
             spotify
             playerctl
@@ -44,9 +43,10 @@ in
             maestral-gui
             keepassxc
             discord
-            flameshot
-            cmake
-            gnumake
+            flameshot  
+            gimp    
+            xournalpp
+            chromium      
         ];
     };
 

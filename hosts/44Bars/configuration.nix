@@ -67,7 +67,6 @@ in
   environment.systemPackages = with pkgs; [
     iptsd
     brightnessctl # used for changing brightness
-    xournalpp
     home-manager
     kitty
     wget
@@ -83,8 +82,7 @@ in
     xorg.xf86inputlibinput
     xorg.xorgserver
     xorg.xf86videoati
-    thermald  
-    chromium
+    thermald
   ];
 
   services.udev.packages = with pkgs; [

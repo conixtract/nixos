@@ -39,8 +39,8 @@ exec --no-startup-id nm-applet
 ##############################################
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec brightnessctl s +10% && pkill -RTMIN+1 i3blocks # increase screen brightness
-bindsym XF86MonBrightnessDown exec brightnessctl s 10%- && pkill -RTMIN+1 i3blocks # decrease screen brightness
+bindsym XF86MonBrightnessUp exec brightnessctl s +10% 
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
 #volume
 set $refresh_volume polybar-msg action volume hook 0
@@ -226,7 +226,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id "rofi -show"
 
 # keybinding to lock screen
-bindsym $mod+Control+l exec "i3lock -e -i ~/nixos/home/shared/Wallpaper/astronaut.png"
+bindsym $mod+Control+l exec "i3lock -e -i ~/nixos/home/shared/wallpaper/astronaut.png"
 #keybinding to shut down
 bindsym $mod+Control+p exec poweroff
 #keybinding to reboot
@@ -271,7 +271,7 @@ for_window [class="(?i)Sxiv"] floating enable
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 # start wallpaper manager
-bindsym $mod+Shift+w exec "cd ~/nixos/home/shared/scripts && ./wall-d -d ~/nixos/home/shared/Wallpaper/2736x1824 -f -R"
+bindsym $mod+Shift+w exec "cd ~/nixos/home/shared/scripts && ./wall-d -d ~/nixos/home/shared/wallpaper/wallpaper-menu -f -R"
 
 
 # references

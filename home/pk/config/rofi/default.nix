@@ -68,7 +68,7 @@
         imagebox {
             padding:                     20px;
             background-color:            transparent;
-            background-image:            url("~/nixos/home/shared/Wallpaper/deity.jpg", height);
+            background-image:            url("~/nixos/home/shared/wallpaper/deity.jpg", height);
             orientation:                 vertical;
             children:                    [ "inputbar", "dummy", "mode-switcher" ];
         }
