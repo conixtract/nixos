@@ -54,5 +54,5 @@
         alsa-utils #used for i3blocks volume and managing audio
     ];
 
-    system.stateVersion = "23.05";
+    system.stateVersion = "23.11";
 }
