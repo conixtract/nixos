@@ -48,19 +48,8 @@ in
       xterm.enable = false;
     };
 
-    displayManager = {
-      defaultSession = "none+i3";
-    };
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-        i3lock
-        i3blocks
-      ];
-    };
+    displayManager.defaultSession = "none+i3";
+    windowManager.i3.enable = true;
 
   };
 
@@ -85,6 +74,10 @@ in
     thermald
   ];
 
+   services.dbus.packages = with pkgs; [
+    xfce.xfconf
+  ];
+
   services.udev.packages = with pkgs; [
     iptsd
   ];
@@ -100,6 +93,16 @@ in
       BROWSER = "chromium";
       TERMINAL = "kitty";
   };
+
+  # console setup
+  console = {
+      earlySetup = true;
+      font = "ter-i32b";
+      packages = with pkgs; [ terminus_font ];
+      keyMap = "de";
+  };
+  programs.zsh.enable = true;
+
 
   # enable bluetooth
   hardware.bluetooth.enable = true;
@@ -123,6 +126,7 @@ in
       description = "pk";
       extraGroups = [ "networkmanager" "wheel" "video" "surface-control"];
       packages = with pkgs; [];
+      shell = pkgs.zsh;
   };
 
   nixpkgs.config.packageOverrides = pkgs: {

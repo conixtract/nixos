@@ -62,6 +62,7 @@ just ... just don't
 - [x] get polybar running
 - [ ] pywall integration
 - [ ] calendar widget with google calendar sync
+- [x] setup ohmyzsh
 
 ## Credits
 > **Note**

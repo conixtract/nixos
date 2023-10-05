@@ -12,12 +12,13 @@ in
     imports = [
         #../shared
         # import configurations
-        #(import ./config/i3/default.nix)       
+        #(import ./config/i3/default.nix { inherit config pkgs; })       
         #(import ./config/kitty/default.nix)
         (import ./config/vscode/default.nix)
         (import ./config/picom/default.nix)
         (import ./config/rofi/default.nix { inherit config pkgs colors; })
         (import ./config/polybar/default.nix)
+        (import ./config/zsh/default.nix)
         #"${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
     ];
 
@@ -46,7 +47,9 @@ in
             flameshot  
             gimp    
             xournalpp
-            chromium      
+            chromium    
+            xfce.thunar
+            texlive.combined.scheme-full
         ];
     };
 

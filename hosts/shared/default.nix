@@ -54,13 +54,5 @@
         alsa-utils #used for i3blocks volume and managing audio
     ];
 
-    # console setup
-    console = {
-        earlySetup = true;
-        font = "ter-i32b";
-        packages = with pkgs; [ terminus_font ];
-        keyMap = "de";
-    };
-
     system.stateVersion = "23.05";
 }
