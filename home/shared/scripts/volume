@@ -2,8 +2,8 @@
 
 MUTE=$(amixer get Master | grep -E -o -m 1 "\[\w*\]" | grep -o "\w*")
 if [[ "$MUTE" = "off" ]] ; then
-    volume=
     label=""
+    echo "$label"
 else
     volume=$(amixer get Master | grep -E -o -m 1 "[[:digit:]]*%" | grep -o "[[:digit:]]*")
     if (( $volume = 0)) ; then
@@ -15,6 +15,6 @@ else
         fi
     fi
     volume="$volume%"
-fi
 
-echo "$label $volume"
+    echo "$label $volume"
+fi

@@ -12,7 +12,7 @@
 ![Composer](https://img.shields.io/badge/Comp-picom-%239400FF?style=for-the-badge)
 ![Static Badge](https://img.shields.io/badge/Editor-VSCODE-%23FFDC00?style=for-the-badge)
 
-<img src="../home/shared/Wallpaper/Bobby_Tarantino.jpeg" alt="showcase" width="300" height=auto>
+<img src="../home/shared/wallpaper/Bobby_Tarantino.jpeg" alt="showcase" width="300" height=auto>
 
 </div>
 

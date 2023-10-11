@@ -8,6 +8,7 @@
             esbenp.prettier-vscode
             ms-vscode.cpptools
             ms-vscode-remote.remote-ssh
+            # James-Yu.latex-workshop
         ];
     };
 }
