@@ -226,7 +226,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id "rofi -show"
 
 # keybinding to lock screen
-bindsym $mod+Control+l exec "i3lock -e -i ~/nixos/home/shared/wallpaper/astronaut.png"
+bindsym $mod+Control+l exec "cd ~/nixos/home/shared/scripts/ && ./lock-screen.sh ring"
 #keybinding to shut down
 bindsym $mod+Control+p exec poweroff
 #keybinding to reboot

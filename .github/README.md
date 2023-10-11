@@ -48,6 +48,10 @@ This is the general structure of my dotfiles.
 | ------------------------------------------------------------------------------------------------------------------ |
 | <a href="#--------"><img src="screenshots/rofi_menu.png" alt="bottom panel preview"></a>                    |
 
+| <b>Lock Screen</b>                                                                              |
+| ------------------------------------------------------------------------------------------------------------------ |
+| <a href="#--------"><img src="screenshots/lock_screen.png" alt="bottom panel preview"></a>                    |
+
 
 ## Installation
 Don't
@@ -58,11 +62,12 @@ just ... just don't
 
 - [ ] pijulius picom animations
 - [ ] sys menu
-- [ ] lock screen
+- [x] lock screen
 - [x] get polybar running
 - [ ] pywall integration
 - [ ] calendar widget with google calendar sync
 - [x] setup ohmyzsh
+- [x] tray icons
 
 ## Credits
 > **Note**

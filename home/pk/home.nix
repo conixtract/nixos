@@ -50,6 +50,7 @@ in
             chromium    
             xfce.thunar
             texlive.combined.scheme-full
+            i3lock-color
         ];
     };
 
