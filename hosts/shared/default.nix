@@ -1,5 +1,9 @@
 {config, pkgs, ...}: 
 
+let
+    gugi-font = pkgs.callPackage ../../derivs/gugi-font.nix {  };
+    dancing-script = pkgs.callPackage ../../derivs/dancing-script.nix{  };
+in
 {
     # Bootloader.  
     boot.loader.systemd-boot.enable = true;
@@ -46,6 +50,8 @@
     fonts.packages = with pkgs; [
         (nerdfonts.override { fonts = [ "Iosevka" "CascadiaCode" "JetBrainsMono" ]; })
         font-awesome
+        #gugi-font
+        dancing-script
     ];
 
     environment.systemPackages = with pkgs; [

@@ -15,33 +15,45 @@ if [[ "$1" = "ring" ]]; then
     i3lock-color \
         -i ~/nixos/home/shared/wallpaper/screen-saver/rebecca_good_ending_snowflake_50_blur.png \
         -e \
-        --color="#00000000" \
         --force-clock \
         --indicator \
         --radius="120" \
+        \
+        --color="#00000000" \
+        --bshl-color="$alert" \
+        --keyhl-color="$foreground" \
+        --bar-color="$background" \
+        \
         --inside-color="$transparant" \
         --ring-color="$background" \
         --insidever-color="$transparant" \
         --ringver-color="$verify" \
         --insidewrong-color="$transparant" \
         --ringwrong-color="$alert" \
-        --bshl-color="$alert" \
+        \
+        --layout-color="$foreground" \
+        --time-color="$foreground" \
+        --date-color="$foreground" \
+        --greeter-color="$foreground" \
+        \
         --date-str="%d-%m-%Y" \
         --time-str="%I:%M %p" \
         --greeter-text="Welcome!" \
         --verif-text="" \
         --wrong-text="" \
         --noinput-text="" \
-        --layout-color="$foreground" \
-        --time-color="$foreground" \
-        --date-color="$foreground" \
-        --greeter-color="$foreground" \
-        --time-pos="$xoffset:$yoffset-20" \
-        --date-pos="$xoffset:$yoffset" \
+        \
+        --greeter-font="Dancing Script:style=Regular" \
+        --time-font="Dancing Script:style=Regular" \
+        --date-font="Dancing Script:style=Regular" \
+        --greeter-size=50 \
+        --time-size=42 \
+        --date-size=16 \
+        \
+        --time-pos="$xoffset:$yoffset-30" \
+        --date-pos="$xoffset:$yoffset-5" \
         --greeter-pos="$xoffset:$yoffset+50" \
-        --ind-pos="$xoffset:$yoffset" \
-        --bar-color="$background" \
-        --keyhl-color="$foreground"
+        --ind-pos="$xoffset:$yoffset"
 fi
 
 if [[ "$1" = "bar" ]]; then
@@ -51,29 +63,39 @@ if [[ "$1" = "bar" ]]; then
     i3lock-color \
         -i ~/nixos/home/shared/wallpaper/screen-saver/rebecca_good_ending_snowflake_50_blur.png \
         -e \
-        --color="#00000000" \
         --force-clock \
         --bar-indicator \
+        --bar-orientation="vertical" \
+        --bar-total-width="170" \
+        \
         --date-str="%d-%m-%Y" \
         --time-str="%I:%M %p" \
         --greeter-text="Welcome!" \
+        --verif-text="" \
+        --wrong-text="" \
+        --noinput-text="" \
+        \
+        --color="#00000000" \
+        --ringver-color="$verify" \
+        --ringwrong-color="$alert" \
+        --bar-color="$background" \
+        --keyhl-color="$foreground" \
+        --bshl-color="$alert" \
+        \
         --layout-color="$foreground" \
         --time-color="$foreground" \
         --date-color="$foreground" \
         --greeter-color="$foreground" \
+        \
+        --greeter-font="Dancing Script:style=Regular" \
+        --time-font="Dancing Script:style=Regular" \
+        --date-font="Dancing Script:style=Regular" \
+        --greeter-size=50 \
+        --time-size=42 \
+        --date-size=16 \
+        \
         --time-pos="$xoffset+120:$yoffset+50" \
-        --date-pos="$xoffset+120:$yoffset+70" \
+        --date-pos="$xoffset+120:$yoffset+75" \
         --greeter-pos="$xoffset+120:$yoffset+140" \
-        --bar-pos="$xoffset:$yoffset" \
-        --bar-orientation="vertical" \
-        --bar-color="$background" \
-        --bar-total-width="170" \
-        --keyhl-color="$foreground" \
-        --bshl-color="$alert" \
-        --ringver-color="$verify" \
-        --ringwrong-color="$alert" \
-        --verif-text="" \
-        --wrong-text="" \
-        --noinput-text=""
-
+        --bar-pos="$xoffset:$yoffset"
 fi

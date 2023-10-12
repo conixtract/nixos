@@ -250,6 +250,7 @@ bindsym $mod+Control+b exec reboot
 #on i3 startup 
 # background image
 exec ~/.fehbg
+exec $refresh_volume
 exec_always --no-startup-id keepassxc
 exec_always --no-startup-id picom
 exec_always --no-startup-id ~/nixos/home/pk/config/polybar/launch.sh

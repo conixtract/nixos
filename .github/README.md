@@ -10,7 +10,7 @@
 
 ![Terminal](https://img.shields.io/badge/Terminal-Kitty-%2300DC8D?style=for-the-badge)
 ![Composer](https://img.shields.io/badge/Comp-picom-%239400FF?style=for-the-badge)
-![Static Badge](https://img.shields.io/badge/Editor-VSCODE-%23FFDC00?style=for-the-badge)
+![DisplayManager](https://img.shields.io/badge/DM-SDDM-%23FFDC00?style=for-the-badge)
 
 <img src="../home/shared/wallpaper/Bobby_Tarantino.jpeg" alt="showcase" width="300" height=auto>
 
@@ -48,10 +48,9 @@ This is the general structure of my dotfiles.
 | ------------------------------------------------------------------------------------------------------------------ |
 | <a href="#--------"><img src="screenshots/rofi_menu.png" alt="bottom panel preview"></a>                    |
 
-| <b>Lock Screen</b>                                                                              |
-| ------------------------------------------------------------------------------------------------------------------ |
-| <a href="#--------"><img src="screenshots/lock_screen.png" alt="bottom panel preview"></a>                    |
-
+<b>Lock Screen</b>             |  <b>Login Screen</b>  
+:-------------------------:|:-------------------------:
+<a href="#--------"><img src="screenshots/lock_screen.png" alt="bottom panel preview"></a>  |  <a href="#--------"><img src="screenshots/login_screen.png" alt="bottom panel preview"></a>
 
 ## Installation
 Don't
@@ -64,6 +63,7 @@ just ... just don't
 - [ ] sys menu
 - [x] lock screen
 - [x] get polybar running
+- [x] display manager
 - [ ] pywall integration
 - [ ] calendar widget with google calendar sync
 - [x] setup ohmyzsh
@@ -81,3 +81,7 @@ just ... just don't
     - polybar
 - [Ronnie Nissan](https://github.com/ronniedroid)
     - Wall-d
+- [Michael Peyton Jones](https://github.com/michaelpj)
+    - sddm theme nix package
+- [David Worms](https://www.adaltas.com/en/2022/03/29/nix-package-creation-install-font/)
+    - font packaging
