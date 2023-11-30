@@ -51,6 +51,11 @@ in
             xfce.thunar
             texlive.combined.scheme-full
             i3lock-color
+            mattermost-desktop
+            openconnect
+            x2goclient
+            evince
+            realvnc-vnc-viewer
         ];
     };
 

@@ -9,6 +9,7 @@
             ms-vscode.cpptools
             ms-vscode-remote.remote-ssh
             # James-Yu.latex-workshop
+            # ms-vscode.cmake-tools
         ];
     };
 }

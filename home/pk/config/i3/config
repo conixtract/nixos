@@ -264,6 +264,7 @@ assign [class="(?i)Code"] $ws2
 assign [class="(?i)kitty"] $ws3
 assign [class="(?i)obsidian"] $ws4
 assign [class="(?i)discord"] $ws9
+assign [class="(?i)mattermost"] $ws9
 assign [class="(?i)spotify"] $ws10
 for_window [class="(?i)KeePassXC"], move scratchpad
 
