@@ -68,6 +68,7 @@ just ... just don't
 - [ ] calendar widget with google calendar sync
 - [x] setup ohmyzsh
 - [x] tray icons
+- [ ] sddm as lock screen
 
 ## Credits
 > **Note**

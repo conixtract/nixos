@@ -85,6 +85,7 @@ in
 		sddm-kcm
 		themes.sddm-sugar-dark
 		libsForQt5.qt5.qtgraphicaleffects
+		obsidian # this is not in home manager because the home manager version is not updated to fix the "Electron version 25.9.0 is EOL" issue
 	];
 
 	services.dbus.packages = with pkgs; [
@@ -131,6 +132,7 @@ in
 
 	nixpkgs.config.permittedInsecurePackages = [
 		"openssl-1.1.1v"
+		"electron-25.9.0"
 	];
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.

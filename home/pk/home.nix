@@ -39,7 +39,7 @@ in
             playerctl
             acpi # used for i3blocks battery
             sxiv # used for wallpaper manager
-            obsidian
+            #obsidian
             maestral
             maestral-gui
             keepassxc
@@ -56,6 +56,7 @@ in
             x2goclient
             evince
             realvnc-vnc-viewer
+            virtualgl
         ];
     };
 
