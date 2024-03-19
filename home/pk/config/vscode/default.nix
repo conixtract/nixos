@@ -5,11 +5,13 @@
         extensions = with pkgs.vscode-extensions; [
             bbenoist.nix
             dracula-theme.theme-dracula
+            alefragnani.bookmarks
             esbenp.prettier-vscode
             ms-vscode.cpptools
             ms-vscode-remote.remote-ssh
             # James-Yu.latex-workshop
-            # ms-vscode.cmake-tools
+            ms-vscode.cmake-tools
+            valentjn.vscode-ltex
         ];
     };
 }

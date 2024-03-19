@@ -59,6 +59,4 @@ in
         pulseaudio # see following link for explaination why pulseaudio is needed https://www.reddit.com/r/NixOS/comments/wyu3rj/comment/ilyz3zq/?utm_source=share&utm_medium=web2x&context=3
         alsa-utils #used for i3blocks volume and managing audio
     ];
-
-    system.stateVersion = "23.11";
 }

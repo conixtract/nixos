@@ -70,6 +70,7 @@ in
 		kitty
 		wget
 		git
+		direnv
 		neofetch
 		unzip
 		python3
@@ -156,4 +157,6 @@ in
 			libvdpau-va-gl
 		];
 	};
+
+	system.stateVersion = "23.11";
 }

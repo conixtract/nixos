@@ -57,6 +57,7 @@ in
             evince
             realvnc-vnc-viewer
             virtualgl
+            element-desktop
         ];
     };
 
