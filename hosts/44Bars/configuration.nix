@@ -86,7 +86,7 @@ in
 		sddm-kcm
 		themes.sddm-sugar-dark
 		libsForQt5.qt5.qtgraphicaleffects
-		obsidian # this is not in home manager because the home manager version is not updated to fix the "Electron version 25.9.0 is EOL" issue
+		# obsidian # this is not in home manager because the home manager version is not updated to fix the "Electron version 25.9.0 is EOL" issue
 	];
 
 	services.dbus.packages = with pkgs; [

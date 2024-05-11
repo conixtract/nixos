@@ -55,8 +55,8 @@ in
             openconnect
             x2goclient
             evince
-            realvnc-vnc-viewer
-            virtualgl
+            # realvnc-vnc-viewer
+            # virtualgl
             element-desktop
         ];
     };
