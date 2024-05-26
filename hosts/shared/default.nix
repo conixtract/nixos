@@ -21,6 +21,7 @@ in
         # If you want to use JACK applications, uncomment this
         jack.enable = true;
     };
+    hardware.pulseaudio.enable = false;
 
     # Set your time zone.
     time.timeZone = "Europe/Berlin";
@@ -41,10 +42,9 @@ in
     };
 
     # Configure keymap in X11
-    services.xserver = {
-        enable = true;
+    services.xserver.xbk = {
         layout = "de";
-        xkbVariant = "neo_qwertz";
+        Variant = "neo_qwertz";
     };
 
     fonts.packages = with pkgs; [

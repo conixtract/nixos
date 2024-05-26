@@ -43,23 +43,23 @@ in
 
 	# Configure keymap in X11
 	services.xserver = {
-	# natural scrolling
-	libinput.touchpad.naturalScrolling = true;
-
-	desktopManager = {
-		xterm.enable = false;
-	};
-
-	displayManager = {
-		defaultSession = "none+i3";
-		sddm = {
-			enable = true;
-			enableHidpi = true;
-			theme = "sugar-dark";
+		displayManager = {
+			defaultSession = "none+i3";
+			sddm = {
+				enable = true;
+				enableHidpi = true;
+				theme = "sugar-dark";
+			};
 		};
-	};
 
-	windowManager.i3.enable = true;
+		# natural scrolling
+		libinput.touchpad.naturalScrolling = true;
+
+		desktopManager = {
+			xterm.enable = false;
+			gnome.enable = true; #for icon theme in xorunalpp
+		};
+		windowManager.i3.enable = true;
 
 	};
 
@@ -87,7 +87,24 @@ in
 		themes.sddm-sugar-dark
 		libsForQt5.qt5.qtgraphicaleffects
 		# obsidian # this is not in home manager because the home manager version is not updated to fix the "Electron version 25.9.0 is EOL" issue
+		networkmanager_dmenu
+		usbutils
+		udiskie
+		udisks
+		dbeaver
 	];
+
+	# Create /var/lib/pgadmin with the correct permissions
+	services.postgresql = {
+    enable = true;
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all       all     trust
+    '';
+  };
+
+	services.gvfs.enable = true;
+	services.udisks2.enable = true;
 
 	services.dbus.packages = with pkgs; [
 		xfce.xfconf
