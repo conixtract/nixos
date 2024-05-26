@@ -2,7 +2,7 @@
 
 let
 	nixos-hardware = builtins.fetchTarball "https://github.com/NixOS/nixos-hardware/archive/master.tar.gz";
-	home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+	home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
 	themes = pkgs.callPackage ../../derivs/sddm-themes.nix {};
 in
 {
@@ -43,17 +43,7 @@ in
 
 	# Configure keymap in X11
 	services.xserver = {
-		displayManager = {
-			defaultSession = "none+i3";
-			sddm = {
-				enable = true;
-				enableHidpi = true;
-				theme = "sugar-dark";
-			};
-		};
-
-		# natural scrolling
-		libinput.touchpad.naturalScrolling = true;
+		enable = true;
 
 		desktopManager = {
 			xterm.enable = false;
@@ -62,6 +52,19 @@ in
 		windowManager.i3.enable = true;
 
 	};
+
+	services.displayManager = {
+		defaultSession = "none+i3";
+		sddm = {
+			enable = true;
+			enableHidpi = true;
+			theme = "sugar-dark";
+		};
+	};
+
+	# natural scrolling
+	services.libinput.touchpad.naturalScrolling = true;
+
 
 	environment.systemPackages = with pkgs; [
 		iptsd

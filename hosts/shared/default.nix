@@ -42,9 +42,9 @@ in
     };
 
     # Configure keymap in X11
-    services.xserver.xbk = {
+    services.xserver.xkb = {
         layout = "de";
-        Variant = "neo_qwertz";
+        variant = "neo_qwertz";
     };
 
     fonts.packages = with pkgs; [
