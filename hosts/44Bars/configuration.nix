@@ -7,7 +7,7 @@ let
 in
 {
 	imports = [
-		#<nixos-hardware/microsoft/surface/surface-pro-intel> # import surface kernel
+		# <nixos-hardware/microsoft/surface/surface-pro-intel> # import surface kernel
 		(import "${nixos-hardware}/microsoft/surface/surface-pro-intel")
 		(import "${home-manager}/nixos")
 		./hardware-configuration.nix    
@@ -15,8 +15,8 @@ in
 	];
 
 	#surface specifics
-	microsoft-surface.ipts.enable = true;
-	microsoft-surface.surface-control.enable = true;
+	# microsoft-surface.ipts.enable = true;
+	# microsoft-surface.surface-control.enable = true;
 
 	# change location of the configuration.nix file
 	nix.nixPath = [ 
@@ -94,15 +94,18 @@ in
 		usbutils
 		udiskie
 		udisks
-		dbeaver
 	];
 
 	# Create /var/lib/pgadmin with the correct permissions
 	services.postgresql = {
     enable = true;
+    ensureDatabases = [ "mydatabase" ];
     authentication = pkgs.lib.mkOverride 10 ''
-      #type database  DBuser  auth-method
-      local all       all     trust
+			# Generated file; do not edit!
+			# TYPE  DATABASE        USER            ADDRESS                 METHOD
+			local   all             all                                     trust
+			host    all             all             127.0.0.1/32            trust
+			host    all             all             ::1/128                 trust
     '';
   };
 
@@ -138,6 +141,17 @@ in
 	};
 	programs.zsh.enable = true;
 
+	#enable printing
+	services.printing.enable = true;
+	#enable wifi autodetect
+	services.avahi = {
+		enable = true;
+		nssmdns = true;
+		openFirewall = true;
+	};
+
+	#enable scanning
+	hardware.sane.enable = true; # enables support for SANE scanners
 
 	# enable bluetooth
 	hardware.bluetooth.enable = true;
@@ -160,7 +174,7 @@ in
 	users.users.pk = {
 		isNormalUser = true;
 		description = "pk";
-		extraGroups = [ "networkmanager" "wheel" "video" "surface-control"];
+		extraGroups = [ "networkmanager" "wheel" "video" "surface-control" "scanner" "lp" ];
 		packages = with pkgs; [];
 		shell = pkgs.zsh;
 	};
