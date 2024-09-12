@@ -58,6 +58,7 @@ in
             # realvnc-vnc-viewer
             # virtualgl
             element-desktop
+            dbeaver
         ];
     };
 
