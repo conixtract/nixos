@@ -1,182 +1,129 @@
-{ config, pkgs, ... } :
+{ config, pkgs, ... }:
 
 let
-	nixos-hardware = builtins.fetchTarball "https://github.com/NixOS/nixos-hardware/archive/master.tar.gz";
-	home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-	themes = pkgs.callPackage ../../derivs/sddm-themes.nix {};
+  # themes = pkgs.callPackage ../../derivs/sddm-themes.nix { }; # for sddm
+  # dancing-script = pkgs.callPackage ../../derivs/dancing-script.nix { }; # for sddm
 in
 {
-	imports = [
-		#<nixos-hardware/microsoft/surface/surface-pro-intel> # import surface kernel
-		(import "${nixos-hardware}/microsoft/surface/surface-pro-intel")
-		(import "${home-manager}/nixos")
-		./hardware-configuration.nix    
-		../shared
-	];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    <home-manager/nixos>
+  ];
 
-	#surface specifics
-	microsoft-surface.ipts.enable = true;
-	microsoft-surface.surface-control.enable = true;
+  #! disabeling usb c support ucsi_acpi USBC000:00: UCSI_GET_PDOS failed (-95) errors on startup
+  # boot.blacklistedKernelModules = [
+  #   "ucsi_acpi"
+  # ];
 
-	# change location of the configuration.nix file
-	nix.nixPath = [ 
-		"/home/pk/.nix-defexpr/channels"
-		"nixos-config=/home/pk/nixos/hosts/44Bars/configuration.nix"
-		"nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-		"/nix/var/nix/profiles/per-user/root/channels"
-	];
+  # Bootloader.  
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-	networking.hostName = "44Bars"; # Define your hostname.
+  # Enable networking
+  networking.networkmanager.enable = true;
 
-	# logind behavior
-	services.logind.extraConfig = ''
-		HandlePowerKey=ignore
-		HandleSuspendKey=ignore
-		HandleHibernateKey=ignore
-	'';
+  # Set your time zone.
+  time.timeZone = "Europe/Berlin";
 
-	services.picom.enable = true;
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
 
-	nixpkgs.config.allowUnfree = true;
-
-	environment.pathsToLink = [ "/libexec" ]; # needed for i3 blocks
-
-	# Configure keymap in X11
-	services.xserver = {
-		enable = true;
-
-		desktopManager = {
-			xterm.enable = false;
-			gnome.enable = true; #for icon theme in xorunalpp
-		};
-		windowManager.i3.enable = true;
-
-	};
-
-	services.displayManager = {
-		defaultSession = "none+i3";
-		sddm = {
-			enable = true;
-			enableHidpi = true;
-			theme = "sugar-dark";
-		};
-	};
-
-	# natural scrolling
-	services.libinput.touchpad.naturalScrolling = true;
-
-
-	environment.systemPackages = with pkgs; [
-		iptsd
-		brightnessctl # used for changing brightness
-		home-manager
-		kitty
-		wget
-		git
-		direnv
-		neofetch
-		unzip
-		python3
-		acpilight
-		feh
-		xorg.xev
-		xorg.xf86inputevdev
-		xorg.xf86inputsynaptics
-		xorg.xf86inputlibinput
-		xorg.xorgserver
-		xorg.xf86videoati
-		thermald
-		sddm-kcm
-		themes.sddm-sugar-dark
-		libsForQt5.qt5.qtgraphicaleffects
-		# obsidian # this is not in home manager because the home manager version is not updated to fix the "Electron version 25.9.0 is EOL" issue
-		networkmanager_dmenu
-		usbutils
-		udiskie
-		udisks
-		dbeaver
-	];
-
-	# Create /var/lib/pgadmin with the correct permissions
-	services.postgresql = {
-    enable = true;
-    authentication = pkgs.lib.mkOverride 10 ''
-      #type database  DBuser  auth-method
-      local all       all     trust
-    '';
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "de_DE.UTF-8";
+    LC_IDENTIFICATION = "de_DE.UTF-8";
+    LC_MEASUREMENT = "de_DE.UTF-8";
+    LC_MONETARY = "de_DE.UTF-8";
+    LC_NAME = "de_DE.UTF-8";
+    LC_NUMERIC = "de_DE.UTF-8";
+    LC_PAPER = "de_DE.UTF-8";
+    LC_TELEPHONE = "de_DE.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
-	services.gvfs.enable = true;
-	services.udisks2.enable = true;
+  networking.hostName = "44Bars"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-	services.dbus.packages = with pkgs; [
-		xfce.xfconf
-	];
+  # audio
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
 
-	services.udev.packages = with pkgs; [
-		iptsd
-	];
+  # change location of the configuration.nix file
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos" #dont change this
+    "/nix/var/nix/profiles/per-user/root/channels" #neither this
+    "nixos-config=${config.users.users.forestgump.home}/nixos/hosts/44Bars/configuration.nix"
+  ];
 
-	systemd.packages = with pkgs; [
-		iptsd
-	];
+  # natural srcolling
+  services.libinput.touchpad.naturalScrolling = true;
 
-	home-manager.users.pk = import ../../home/pk/home.nix; #import user config
+  programs = {
+    hyprland.enable = true;
+  };
 
-	environment.variables = {
-		EDITOR = "code";
-		BROWSER = "chromium";
-		TERMINAL = "kitty";
-	};
+  services.xserver = {
+    enable = true;
 
-	# console setup
-	console = {
-		earlySetup = true;
-		font = "ter-i32b";
-		packages = with pkgs; [ terminus_font ];
-		keyMap = "de";
-	};
-	programs.zsh.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true; # Ensure GDM is using Wayland
+    };
+    desktopManager = {
+      gnome.enable = false; # Disable GNOME desktop if enabled
+    };
+  };
 
+  # sddm config
+  /* services.displayManager = {
+      		sddm = {
+        			enable = true;
+      wayland.enable = true;
+      theme = "sugar-dark";
+      autoLogin = {
+        enable = true;
+        user = "forestgump";
+        # delay = 5; # Delay in seconds before auto-login
+      };
+      		};
+    defaultSession = "hyprland";
+    	}; */
 
-	# enable bluetooth
-	hardware.bluetooth.enable = true;
-	services.blueman.enable = true;
+  # Configure console keymap
+  console.keyMap = "de";
 
-	# adjust screen size for surface screen
-	services.xserver.dpi = 180;
-		environment.variables = {
-		GDK_SCALE = "2";
-		GDK_DPI_SCALE = "0.5";
-		_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-	};
+  home-manager.users.forestgump = import ../../home/forestgump/home.nix;
 
-	nixpkgs.config.permittedInsecurePackages = [
-		"openssl-1.1.1v"
-		"electron-25.9.0"
-	];
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.forestgump = {
+    isNormalUser = true;
+    description = "44Bars";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [ ];
+  };
 
-	# Define a user account. Don't forget to set a password with ‘passwd’.
-	users.users.pk = {
-		isNormalUser = true;
-		description = "pk";
-		extraGroups = [ "networkmanager" "wheel" "video" "surface-control"];
-		packages = with pkgs; [];
-		shell = pkgs.zsh;
-	};
+  nixpkgs.config.allowUnfree = true;
 
-	nixpkgs.config.packageOverrides = pkgs: {
-		vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-	};
-	hardware.opengl = {
-		enable = true;
-		extraPackages = with pkgs; [
-			intel-media-driver # LIBVA_DRIVER_NAME=iHD
-			#vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-			vaapiVdpau
-			libvdpau-va-gl
-		];
-	};
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "DroidSansMono" ]; })
+    dejavu_fonts
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+  ];
 
-	system.stateVersion = "23.11";
+  environment.systemPackages = with pkgs; [
+    git
+    keepassxc
+    direnv
+    brightnessctl
+    libsForQt5.qt5.qtgraphicaleffects
+    # dancing-script # for sddm
+    # themes.sddm-sugar-dark # for sddm
+  ];
+
+  system.stateVersion = "24.05";
 }
