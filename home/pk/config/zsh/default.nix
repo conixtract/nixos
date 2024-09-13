@@ -17,7 +17,7 @@
             take-out-trash = "sudo nix-collect-garbage --delete-older-than 5d";
             open = "xdg-open";
             vpn = "openconnect --authenticate -v vpn.rwth-aachen.de --useragent=AnyConnect -b --authgroup=\"RWTH-VPN (Full Tunnel)\" --user=\"fx245575\"";
-            thesis = "cd ~/dev/bachelor-thesis/ && nix-shell shell.nix";
+            koki = "cd ~/dev/KoKi-Website/ && nix-shell shell.nix";
         };
 
         oh-my-zsh = {
