@@ -29,15 +29,14 @@ hosts/
     44Bars/
         hardware-configuration.nix
         configuration.nix
-    shared/
-        default.nix
+    ...
 ```
 This is the general structure of my dotfiles.
 
 1. hosts/
 - contains machine specific configurations
-- `44Bars` contains the configurations for my surface
-- `shared` contains configs which don't change between machines
+- `44Bars` contains the configurations for my current laptop
+- `old44Bars` contains the configurations for my old (dead) surfcae
 
 2. home/
 - contains home-manager(user specific) configurations
@@ -59,18 +58,13 @@ just ... just don't
 
 ## To-DO
 
-- [ ] pijulius picom animations
-- [ ] sys menu
-- [x] lock screen
-- [x] get polybar running
-- [x] display manager
-- [ ] pywall integration
-- [ ] calendar widget with google calendar sync
-- [x] setup ohmyzsh
-- [x] tray icons
-- [ ] sddm as lock screen
+- [ ] wofi menu with run mode
+- [ ] fancy waybar
+- [ ] wallpaper changer
+- [ ] basic apps (discord, mattermost etc)
+- [ ] wl_clipboard
 
-## Credits
+## Credits old44Bars
 > **Note**
 >
 > I do apologies for missing credits as I started documenting after I already had a basic setup.

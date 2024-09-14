@@ -77,6 +77,8 @@ in
     };
   };
 
+  hardware.graphics.enable = true;
+
   # sddm config
   /* services.displayManager = {
       		sddm = {
@@ -94,6 +96,7 @@ in
 
   # Configure console keymap
   console.keyMap = "de";
+  programs.zsh.enable = true;
 
   home-manager.users.forestgump = import ../../home/forestgump/home.nix;
 
@@ -103,6 +106,7 @@ in
     description = "44Bars";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [ ];
+    shell = pkgs.zsh;
   };
 
   nixpkgs.config.allowUnfree = true;
