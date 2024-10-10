@@ -4,13 +4,12 @@
 <div align="center">
 
 ![OS](https://img.shields.io/badge/OS-NixOS-%230E9DF1?style=for-the-badge)
-![WM](https://img.shields.io/badge/wm-i3wm-green?style=for-the-badge)
-![Bar](https://img.shields.io/badge/Bar-Polybar-%23FF007E?style=for-the-badge)
-![Menu](https://img.shields.io/badge/Menu-Rofi-%23FF6D00?style=for-the-badge)
+![compositor](https://img.shields.io/badge/compositor-hyprland-green?style=for-the-badge)
+![Bar](https://img.shields.io/badge/Bar-waybar-%23FF007E?style=for-the-badge)
 
+![Menu](https://img.shields.io/badge/Menu-Rofi-%23FF6D00?style=for-the-badge)
 ![Terminal](https://img.shields.io/badge/Terminal-Kitty-%2300DC8D?style=for-the-badge)
-![Composer](https://img.shields.io/badge/Comp-picom-%239400FF?style=for-the-badge)
-![DisplayManager](https://img.shields.io/badge/DM-SDDM-%23FFDC00?style=for-the-badge)
+![DisplayManager](https://img.shields.io/badge/DM-GDM-%23FFDC00?style=for-the-badge)
 
 <img src="../home/shared/wallpaper/Bobby_Tarantino.jpeg" alt="showcase" width="300" height=auto>
 
@@ -19,7 +18,7 @@
 ## Nix
 ```
 home/
-    pk/
+    forestgump/
         config/
         home.nix
         ...
@@ -58,10 +57,8 @@ just ... just don't
 
 ## To-DO
 
-- [ ] wofi menu with run mode
 - [ ] fancy waybar
 - [ ] wallpaper changer
-- [ ] basic apps (discord, mattermost etc)
 - [ ] wl_clipboard
 
 ## Credits old44Bars

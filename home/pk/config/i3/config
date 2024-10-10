@@ -34,6 +34,8 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+exec --no-startup-id feh --bg-fill ~/nixos/home/shared/wallpaper/astronaut.png
+
 ##############################################
 #               --Media Keys--
 ##############################################
@@ -150,7 +152,7 @@ bindsym $mod+r mode "resize"
 #               --Window style--
 ##############################################
 
-default_border pixel 0
+default_border pixel 2
 gaps inner 10
 
 ##############################################
@@ -238,10 +240,9 @@ bindsym $mod+Control+b exec reboot
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-#bar {
-        #status_command SCRIPT_DIR=~/.config/i3/i3blocks/ i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
-        #position top
-#}
+bar {
+        status_command i3status
+}
 
 ##############################################
 #               --Startup--
@@ -249,11 +250,7 @@ bindsym $mod+Control+b exec reboot
 
 #on i3 startup 
 # background image
-exec ~/.fehbg
-exec $refresh_volume
 exec_always --no-startup-id keepassxc
-exec_always --no-startup-id picom
-exec_always --no-startup-id ~/nixos/home/pk/config/polybar/launch.sh
 
 # focus any window on app start
 for_window [all] focus
@@ -271,9 +268,7 @@ for_window [class="(?i)KeePassXC"], move scratchpad
 for_window [class="(?i)Sxiv"] floating enable
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-# start wallpaper manager
-bindsym $mod+Shift+w exec "cd ~/nixos/home/shared/scripts && ./wall-d -d ~/nixos/home/shared/wallpaper/wallpaper-menu -f -R"
+bindsym $mod+Return exec kitty
 
 
 # references

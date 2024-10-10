@@ -2,6 +2,8 @@
 {
     programs.vscode = {
         enable = true;
+        package = pkgs.vscode.fhs;
+        # package = pkgs.vscode.fhsWithPackages (ps: with ps; [ gdb pkg-config ]);
         extensions = with pkgs.vscode-extensions; [
             bbenoist.nix
             dracula-theme.theme-dracula

@@ -17,7 +17,7 @@
             take-out-trash = "sudo nix-collect-garbage --delete-older-than 5d";
             open = "xdg-open";
             vpn = "openconnect --authenticate -v vpn.rwth-aachen.de --useragent=AnyConnect -b --authgroup=\"RWTH-VPN (Full Tunnel)\" --user=\"fx245575\"";
-            koki = "cd ~/dev/KoKi-Website/ && nix-shell shell.nix";
+            koki = "nohup chromium https://chatgpt.com/ https://app.clockify.me/tracker http://localhost:4000/ https://trello.com/b/gf6pgoc1/koki >/dev/null 2>&1 & && cd ~/dev/KoKi-Website/ && nix-shell shell.nix";
         };
 
         oh-my-zsh = {

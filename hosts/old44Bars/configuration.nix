@@ -70,7 +70,6 @@ in
 	# natural scrolling
 	services.libinput.touchpad.naturalScrolling = true;
 
-
 	environment.systemPackages = with pkgs; [
 		iptsd
 		brightnessctl # used for changing brightness

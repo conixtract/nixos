@@ -73,16 +73,32 @@ in
       wayland = true; # Ensure GDM is using Wayland
     };
     desktopManager = {
+      xterm.enable = false;
       gnome.enable = false; # Disable GNOME desktop if enabled
+    };
+    #* i3 stuff
+    windowManager.i3.enable = true;
+    xkb = {
+      layout = "de";
+      variant = "neo_qwertz";
     };
   };
 
   hardware.graphics.enable = true;
+  # power management
+  powerManagement.enable = true;
+  services.tlp = {
+    enable = true;
+    settings = {
+      START_CHARGE_THRESH_BAT0 = 40;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+    };
+  };
 
   # sddm config
   /* services.displayManager = {
-      		sddm = {
-        			enable = true;
+          		sddm = {
+              			enable = true;
       wayland.enable = true;
       theme = "sugar-dark";
       autoLogin = {
@@ -90,9 +106,9 @@ in
         user = "forestgump";
         # delay = 5; # Delay in seconds before auto-login
       };
-      		};
+          		};
     defaultSession = "hyprland";
-    	}; */
+      	}; */
 
   # Configure console keymap
   console.keyMap = "de";
@@ -112,7 +128,7 @@ in
   nixpkgs.config.allowUnfree = true;
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "DroidSansMono" ]; })
+    (nerdfonts.override { fonts = [ "DroidSansMono" "Iosevka" "CascadiaCode" "JetBrainsMono"]; })
     dejavu_fonts
     noto-fonts
     noto-fonts-cjk
@@ -128,6 +144,16 @@ in
     # dancing-script # for sddm
     # themes.sddm-sugar-dark # for sddm
   ];
+
+  services.postgresql = {
+    enable = true;
+    authentication = pkgs.lib.mkOverride 10 ''
+      # TYPE  DATABASE  USER      ADDRESS         METHOD
+      local   all       all                       trust
+      host    all       all       127.0.0.1/32    trust
+      host    all       all       ::1/128         trust
+    '';
+  };
 
   system.stateVersion = "24.05";
 }

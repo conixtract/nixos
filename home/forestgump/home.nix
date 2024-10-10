@@ -1,4 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+let
+  colors = import ../shared/rose.nix { };
+in
 {
   # some general info  
   home.username = "forestgump";
@@ -10,10 +13,31 @@
 
   imports = [
     (import ./config/hyprland/default.nix)
+    (import ../pk/config/rofi/default.nix { inherit config pkgs colors; })
   ];
 
+  # dropbox setup from https://nixos.wiki/wiki/Dropbox
+  systemd.user.services.dropbox = {
+    Unit = {
+      Description = "Dropbox service";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.dropbox}/bin/dropbox";
+      Restart = "on-failure";
+    };
+  };
+
+  services.swaync.enable = true;
+
+  services.hyprpaper = {
+    enable = true;
+    settings = { }; #! set to empty set such that the config file is not generated and i can place my own
+  };
+
   programs = {
-    wofi.enable = true;
     chromium = {
       enable = true;
       commandLineArgs = [
@@ -22,10 +46,30 @@
     };
     vscode = {
       enable = true;
+      # package = pkgs.vscode.fhsWithPackages (ps: with ps; [
+      #   pkg-config
+      #   gnumake
+      #   clang
+      #   cmake
+      #   eigen
+      #   xorg.libX11
+      #   xorg.libXrandr
+      #   xorg.libXinerama
+      #   xorg.libXcursor
+      #   xorg.libXi
+      #   xorg.libXext
+      #   libGLU
+      #   wayland-scanner
+      #   wayland
+      #   libxkbcommon
+      #   libffi
+      #   gdb
+      #   meshlab
+      # ]);
     };
     waybar = {
       enable = true;
-      systemd.enable = true;
+      systemd.enable = false;
     };
     hyprlock = {
       enable = true;
@@ -56,9 +100,15 @@
     };
   };
 
+  # override the default config files
+  xdg.configFile."hypr/hyprpaper.conf" = lib.mkForce {
+    source = ./config/hyprland/hyprpaper.conf;
+  };
+
   home = {
     file = {
       ".config/hypr/hyprlock.conf".source = ./config/hyprland/hyprlock.conf;
+      ".config/i3/config".source = ../pk/config/i3/config;
     };
     packages = with pkgs; [
       wl-clipboard
@@ -66,6 +116,15 @@
       nixpkgs-fmt
       discord
       mattermost-desktop
+      beekeeper-studio
+      gitkraken
+      openconnect
+      obsidian
+      feh
+      rsync
+      qt5.qtwayland
+      qt6.qtwayland
+      libnotify
     ];
     sessionVariables = {
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
@@ -73,5 +132,7 @@
       BROWSER = "chromium";
       TERMINAL = "kitty";
     };
+
+
   };
 }
