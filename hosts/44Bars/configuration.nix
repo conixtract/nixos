@@ -22,6 +22,14 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.hostName = "44Bars"; # Define your hostname.
+
+  # bluetooth applet
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+    settings.General.Experimental = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -41,7 +49,6 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-  networking.hostName = "44Bars"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # audio
@@ -74,7 +81,7 @@ in
     };
     desktopManager = {
       xterm.enable = false;
-      gnome.enable = false; # Disable GNOME desktop if enabled
+      gnome.enable = false; # Disable GNOME desktop
     };
     #* i3 stuff
     windowManager.i3.enable = true;
@@ -97,8 +104,8 @@ in
 
   # sddm config
   /* services.displayManager = {
-          		sddm = {
-              			enable = true;
+                		sddm = {
+                       			enable = true;
       wayland.enable = true;
       theme = "sugar-dark";
       autoLogin = {
@@ -106,9 +113,9 @@ in
         user = "forestgump";
         # delay = 5; # Delay in seconds before auto-login
       };
-          		};
+                		};
     defaultSession = "hyprland";
-      	}; */
+         	}; */
 
   # Configure console keymap
   console.keyMap = "de";
@@ -128,7 +135,7 @@ in
   nixpkgs.config.allowUnfree = true;
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "DroidSansMono" "Iosevka" "CascadiaCode" "JetBrainsMono"]; })
+    (nerdfonts.override { fonts = [ "DroidSansMono" "Iosevka" "CascadiaCode" "JetBrainsMono" ]; })
     dejavu_fonts
     noto-fonts
     noto-fonts-cjk
@@ -141,9 +148,21 @@ in
     direnv
     brightnessctl
     libsForQt5.qt5.qtgraphicaleffects
+
+    # openssl
+    # nss
+    # libGL
+    # gnome-keyring
+    # libsecret
+    # libgnome-keyring
+    # mesa
+    # mesa.drivers
+    
     # dancing-script # for sddm
     # themes.sddm-sugar-dark # for sddm
   ];
+  security.pam.services.gdm.enableGnomeKeyring = true;
+  services.gnome.gnome-keyring.enable = true;
 
   services.postgresql = {
     enable = true;

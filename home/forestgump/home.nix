@@ -37,6 +37,9 @@ in
     settings = { }; #! set to empty set such that the config file is not generated and i can place my own
   };
 
+  services.gnome-keyring.enable = true;
+  services.gnome-keyring.components = [ "secrets" "ssh" "pkcs11" ];
+
   programs = {
     chromium = {
       enable = true;
@@ -72,6 +75,9 @@ in
       systemd.enable = false;
     };
     hyprlock = {
+      enable = true;
+    };
+    spotify-player = {
       enable = true;
     };
   };
@@ -125,6 +131,11 @@ in
       qt5.qtwayland
       qt6.qtwayland
       libnotify
+      blueman
+      whatsapp-for-linux
+      # geary
+      evolution
+      # mailspring
     ];
     sessionVariables = {
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
