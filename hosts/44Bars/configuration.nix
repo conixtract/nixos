@@ -142,22 +142,15 @@ in
     noto-fonts-emoji
   ];
 
+  programs.seahorse.enable = true;
+
   environment.systemPackages = with pkgs; [
     git
     keepassxc
     direnv
     brightnessctl
     libsForQt5.qt5.qtgraphicaleffects
-
-    # openssl
-    # nss
-    # libGL
-    # gnome-keyring
-    # libsecret
-    # libgnome-keyring
-    # mesa
-    # mesa.drivers
-    
+    libsecret
     # dancing-script # for sddm
     # themes.sddm-sugar-dark # for sddm
   ];

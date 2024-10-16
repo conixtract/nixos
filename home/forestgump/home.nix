@@ -37,9 +37,6 @@ in
     settings = { }; #! set to empty set such that the config file is not generated and i can place my own
   };
 
-  services.gnome-keyring.enable = true;
-  services.gnome-keyring.components = [ "secrets" "ssh" "pkcs11" ];
-
   programs = {
     chromium = {
       enable = true;
@@ -75,9 +72,6 @@ in
       systemd.enable = false;
     };
     hyprlock = {
-      enable = true;
-    };
-    spotify-player = {
       enable = true;
     };
   };
@@ -133,9 +127,12 @@ in
       libnotify
       blueman
       whatsapp-for-linux
-      # geary
-      evolution
-      # mailspring
+      (pkgs.mailspring.overrideAttrs (oldAttrs: rec {
+        postInstall = ''
+          wrapProgram $out/bin/mailspring --add-flags "--password-store=gnome-libsecret"
+        '';
+      }))
+      spotify
     ];
     sessionVariables = {
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
@@ -143,7 +140,5 @@ in
       BROWSER = "chromium";
       TERMINAL = "kitty";
     };
-
-
   };
 }
