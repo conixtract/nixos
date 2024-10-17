@@ -11,11 +11,6 @@ in
     <home-manager/nixos>
   ];
 
-  #! disabeling usb c support ucsi_acpi USBC000:00: UCSI_GET_PDOS failed (-95) errors on startup
-  # boot.blacklistedKernelModules = [
-  #   "ucsi_acpi"
-  # ];
-
   # Bootloader.  
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -68,12 +63,17 @@ in
   # natural srcolling
   services.libinput.touchpad.naturalScrolling = true;
 
+  # virtualization
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
+
   programs = {
     hyprland.enable = true;
   };
 
   services.xserver = {
-    enable = true;
+    enable = true; # naming is just weird, this does not enable x11
 
     displayManager.gdm = {
       enable = true;
@@ -84,11 +84,11 @@ in
       gnome.enable = false; # Disable GNOME desktop
     };
     #* i3 stuff
-    windowManager.i3.enable = true;
-    xkb = {
-      layout = "de";
-      variant = "neo_qwertz";
-    };
+    # windowManager.i3.enable = true;
+    # xkb = {
+    #   layout = "de";
+    #   variant = "neo_qwertz";
+    # };
   };
 
   hardware.graphics.enable = true;
@@ -102,21 +102,6 @@ in
     };
   };
 
-  # sddm config
-  /* services.displayManager = {
-                		sddm = {
-                       			enable = true;
-      wayland.enable = true;
-      theme = "sugar-dark";
-      autoLogin = {
-        enable = true;
-        user = "forestgump";
-        # delay = 5; # Delay in seconds before auto-login
-      };
-                		};
-    defaultSession = "hyprland";
-         	}; */
-
   # Configure console keymap
   console.keyMap = "de";
   programs.zsh.enable = true;
@@ -127,7 +112,7 @@ in
   users.users.forestgump = {
     isNormalUser = true;
     description = "44Bars";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };

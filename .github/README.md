@@ -59,7 +59,6 @@ just ... just don't
 
 - [ ] fancy waybar
 - [ ] wallpaper changer
-- [ ] wl_clipboard
 
 ## Credits old44Bars
 > **Note**

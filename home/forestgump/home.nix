@@ -36,12 +36,15 @@ in
     enable = true;
     settings = { }; #! set to empty set such that the config file is not generated and i can place my own
   };
+  services.clipman.enable = true;
 
   programs = {
     chromium = {
       enable = true;
       commandLineArgs = [
         "--ozone-platform-hint=auto"
+        "--no-sandbox"
+        "--enable-wayland-clipboard"
       ];
     };
     vscode = {
@@ -105,10 +108,18 @@ in
     source = ./config/hyprland/hyprpaper.conf;
   };
 
+  # virtualiztion
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
+    };
+  };
+
   home = {
     file = {
       ".config/hypr/hyprlock.conf".source = ./config/hyprland/hyprlock.conf;
-      ".config/i3/config".source = ../pk/config/i3/config;
+      # ".config/i3/config".source = ../pk/config/i3/config;
     };
     packages = with pkgs; [
       wl-clipboard
