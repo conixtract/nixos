@@ -43,7 +43,6 @@ in
       enable = true;
       commandLineArgs = [
         "--ozone-platform-hint=auto"
-        "--no-sandbox"
         "--enable-wayland-clipboard"
       ];
     };
@@ -79,7 +78,7 @@ in
     };
     alacritty = {
       enable = true;
-      settings = {};
+      settings = { };
     };
   };
 
@@ -127,6 +126,16 @@ in
     file = {
       ".config/hypr/hyprlock.conf".source = ./config/hyprland/hyprlock.conf;
       # ".config/i3/config".source = ../pk/config/i3/config;
+      ".local/bin/open-util" = {
+        executable = true;
+        text = ''
+          #!/usr/bin/env bash
+          whatsapp-for-linux&
+          discord&
+          mattermost-desktop&
+          mailspring&
+        '';
+      };
     };
     packages = with pkgs; [
       wl-clipboard
@@ -158,5 +167,8 @@ in
       BROWSER = "chromium";
       TERMINAL = "alacritty";
     };
+    sessionPath = [
+      "${config.home.homeDirectory}/.local/bin"
+    ];
   };
 }

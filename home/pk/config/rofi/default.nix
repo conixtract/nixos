@@ -5,6 +5,7 @@
     enable = true;
     font = "Iosevka Nerd Font 20";
     package = pkgs.rofi-wayland;
+    terminal = "\${pkgs.alacritty}/bin/alacritty";
     extraConfig = {
       modi = "drun";
       display-drun = "";
