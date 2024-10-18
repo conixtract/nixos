@@ -77,6 +77,10 @@ in
     hyprlock = {
       enable = true;
     };
+    alacritty = {
+      enable = true;
+      settings = {};
+    };
   };
 
   programs.zsh = {
@@ -106,6 +110,9 @@ in
   # override the default config files
   xdg.configFile."hypr/hyprpaper.conf" = lib.mkForce {
     source = ./config/hyprland/hyprpaper.conf;
+  };
+  xdg.configFile."alacritty/alacritty.toml" = lib.mkForce {
+    source = ./config/alacritty/alacritty.toml;
   };
 
   # virtualiztion
@@ -149,7 +156,7 @@ in
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
       EDITOR = "code";
       BROWSER = "chromium";
-      TERMINAL = "kitty";
+      TERMINAL = "alacritty";
     };
   };
 }
