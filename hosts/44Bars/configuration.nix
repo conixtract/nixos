@@ -72,6 +72,10 @@ in
     hyprland.enable = true;
   };
 
+  # only for koch vpn details, disable afterwards
+
+  services.strongswan.enable = true;
+
   services.xserver = {
     enable = true; # naming is just weird, this does not enable x11
 
@@ -84,11 +88,11 @@ in
       gnome.enable = false; # Disable GNOME desktop
     };
     #* i3 stuff
-    # windowManager.i3.enable = true;
-    # xkb = {
-    #   layout = "de";
-    #   variant = "neo_qwertz";
-    # };
+    windowManager.i3.enable = true;
+    xkb = {
+      layout = "de";
+      variant = "neo_qwertz";
+    };
   };
 
   hardware.graphics.enable = true;
@@ -97,7 +101,7 @@ in
   services.tlp = {
     enable = true;
     settings = {
-      START_CHARGE_THRESH_BAT0 = 40;
+      START_CHARGE_THRESH_BAT0 = 60;
       STOP_CHARGE_THRESH_BAT0 = 80;
     };
   };

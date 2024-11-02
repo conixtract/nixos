@@ -18,17 +18,17 @@ in
 
   # dropbox setup from https://nixos.wiki/wiki/Dropbox
   systemd.user.services.dropbox = {
-    Unit = {
-      Description = "Dropbox service";
+      Unit = {
+        Description = "Dropbox service";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.dropbox}/bin/dropbox";
+        Restart = "on-failure";
+      };
     };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.dropbox}/bin/dropbox";
-      Restart = "on-failure";
-    };
-  };
 
   services.swaync.enable = true;
 
@@ -37,6 +37,11 @@ in
     settings = { }; #! set to empty set such that the config file is not generated and i can place my own
   };
   services.clipman.enable = true;
+
+  services.hypridle = {
+    enable = true;
+    settings = { };
+  };
 
   programs = {
     chromium = {
@@ -72,6 +77,8 @@ in
     waybar = {
       enable = true;
       systemd.enable = false;
+      settings = { };
+      style = builtins.readFile ./config/waybar/style.css;
     };
     hyprlock = {
       enable = true;
@@ -97,6 +104,8 @@ in
       open = "xdg-open";
       vpn = "openconnect --authenticate -v vpn.rwth-aachen.de --useragent=AnyConnect -b --authgroup=\"RWTH-VPN (Full Tunnel)\" --user=\"fx245575\"";
       koki = "cd ~/dev/KoKi-Website/ && nix-shell shell.nix";
+      lkp = "cd ~/dev/lkp/ && nix-shell shell.nix";
+      koch-vpn = "sudo swanctl --load-all --file ~/.config/strongswan/swanctl.conf && sudo swanctl --initiate --child net";
     };
 
     oh-my-zsh = {
@@ -110,17 +119,24 @@ in
   xdg.configFile."hypr/hyprpaper.conf" = lib.mkForce {
     source = ./config/hyprland/hyprpaper.conf;
   };
+  xdg.configFile."hypr/hypridle.conf" = lib.mkForce {
+    source = ./config/hyprland/hypridle.conf;
+  };
   xdg.configFile."alacritty/alacritty.toml" = lib.mkForce {
     source = ./config/alacritty/alacritty.toml;
   };
 
-  # virtualiztion
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
-    };
+  xdg.configFile."waybar/config" = lib.mkForce {
+    source = ./config/waybar/waybar.conf;
   };
+
+  # virtualiztion
+  # dconf.settings = {
+  #   "org/virt-manager/virt-manager/connections" = {
+  #     autoconnect = [ "qemu:///system" ];
+  #     uris = [ "qemu:///system" ];
+  #   };
+  # };
 
   home = {
     file = {
@@ -130,10 +146,17 @@ in
         executable = true;
         text = ''
           #!/usr/bin/env bash
+          mailspring&
           whatsapp-for-linux&
           discord&
           mattermost-desktop&
-          mailspring&
+        '';
+      };
+      ".local/bin/calc" = {
+        executable = true;
+        text = ''
+          #!/usr/bin/env bash
+          alacritty -e bash -c "qalc"
         '';
       };
     };
@@ -160,6 +183,13 @@ in
         '';
       }))
       spotify
+      nemo
+      libqalculate
+      element-desktop
+      killall
+      volantes-cursors
+      strongswan
+      unzip
     ];
     sessionVariables = {
       ELECTRON_OZONE_PLATFORM_HINT = "auto";

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #script for lock screen
 # man i3lock-color to see options
 
