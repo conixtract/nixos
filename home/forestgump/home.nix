@@ -104,8 +104,10 @@ in
       open = "xdg-open";
       vpn = "openconnect --authenticate -v vpn.rwth-aachen.de --useragent=AnyConnect -b --authgroup=\"RWTH-VPN (Full Tunnel)\" --user=\"fx245575\"";
       koki = "cd ~/dev/KoKi-Website/ && nix-shell shell.nix";
-      lkp = "cd ~/dev/lkp/ && nix-shell shell.nix";
-      koch-vpn = "sudo swanctl --load-all --file ~/.config/strongswan/swanctl.conf && sudo swanctl --initiate --child net";
+      connect-koch-vpn = "sudo swanctl --load-all --file ~/.config/strongswan/swanctl.conf && sudo swanctl --initiate --child net";
+      disconnect-koch-vpn = "sudo swanctl --terminate net && sudo systemctl restart strongswan";
+      nix = "code ~/nixos";
+      hiwi = "cd ~/dev/mesh-kernel && nix-shell shell.nix";
     };
 
     oh-my-zsh = {
@@ -196,6 +198,7 @@ in
       EDITOR = "code";
       BROWSER = "chromium";
       TERMINAL = "alacritty";
+      garden = "$HOME/Dropbox/digital-garden/";
     };
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
