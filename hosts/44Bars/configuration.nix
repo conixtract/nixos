@@ -70,6 +70,7 @@ in
 
   programs = {
     hyprland.enable = true;
+    sway.enable = true;
   };
 
   # only for koch vpn details, disable afterwards
@@ -80,8 +81,8 @@ in
     enable = true; # naming is just weird, this does not enable x11
 
     displayManager.gdm = {
-      enable = true;
-      wayland = true; # Ensure GDM is using Wayland
+        enable = true;
+        wayland = true; # Ensure GDM is using Wayland
     };
     desktopManager = {
       xterm.enable = false;
@@ -143,6 +144,7 @@ in
     # dancing-script # for sddm
     # themes.sddm-sugar-dark # for sddm
   ];
+  
   security.pam.services.gdm.enableGnomeKeyring = true;
   services.gnome.gnome-keyring.enable = true;
 

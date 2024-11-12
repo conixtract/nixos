@@ -13,8 +13,10 @@ in
 
   imports = [
     (import ./config/hyprland/default.nix)
-    (import ../pk/config/rofi/default.nix { inherit config pkgs colors; })
+    (import ./config/rofi/default.nix { inherit config pkgs colors lib; })
   ];
+
+  wayland.windowManager.sway.enable = true;
 
   # dropbox setup from https://nixos.wiki/wiki/Dropbox
   systemd.user.services.dropbox = {
@@ -132,6 +134,10 @@ in
     source = ./config/waybar/waybar.conf;
   };
 
+  xdg.configFile."sway/config" = lib.mkForce {
+    source = ./config/sway/sway.conf;
+  };
+
   # virtualiztion
   # dconf.settings = {
   #   "org/virt-manager/virt-manager/connections" = {
@@ -192,6 +198,7 @@ in
       volantes-cursors
       strongswan
       unzip
+      texlive.combined.scheme-full
     ];
     sessionVariables = {
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
@@ -201,7 +208,8 @@ in
       garden = "$HOME/Dropbox/digital-garden/";
     };
     sessionPath = [
-      "${config.home.homeDirectory}/.local/bin"
+      "$HOME/.local/bin"
+      "$HOME/nixos/home/shared/scripts"
     ];
   };
 }
