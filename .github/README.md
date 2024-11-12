@@ -57,7 +57,7 @@ just ... just don't
 
 ## To-DO
 
-- [ ] fancy waybar
+- [ ] setup global color files
 - [ ] wallpaper changer
 
 ## Credits old44Bars
