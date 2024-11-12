@@ -1,6 +1,6 @@
 {}:
 rec {
-   wallpaper = "scenemono.png"; 
+  wallpaper = "scenemono.png"; 
   foreground = "e0def4";
   background = "191724";
   darker = "13111e";
