@@ -68,7 +68,7 @@ in
   programs.virt-manager.enable = true;
 
   programs = {
-    hyprland.enable = true;
+    hyprland.enable = false;
     sway.enable = true;
   };
 

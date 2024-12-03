@@ -15,6 +15,7 @@ in
     (import ./config/hyprland/default.nix)
     (import ./config/rofi/default.nix { inherit config pkgs colors lib; })
     (import ./config/vscode/default.nix)
+    (import ./config/polybar/default.nix)
   ];
 
   wayland.windowManager.sway.enable = true;
@@ -128,23 +129,6 @@ in
     file = {
       ".config/hypr/hyprlock.conf".source = ./config/hyprland/hyprlock.conf;
       # ".config/i3/config".source = ../pk/config/i3/config;
-      ".local/bin/open-util" = {
-        executable = true;
-        text = ''
-          #!/usr/bin/env bash
-          mailspring&
-          whatsapp-for-linux&
-          discord&
-          mattermost-desktop&
-        '';
-      };
-      ".local/bin/calc" = {
-        executable = true;
-        text = ''
-          #!/usr/bin/env bash
-          alacritty -e bash -c "qalc"
-        '';
-      };
     };
     packages = with pkgs; [
       wl-clipboard
@@ -177,6 +161,8 @@ in
       strongswan
       unzip
       texlive.combined.scheme-full
+      swaybg
+      i3status
     ];
     sessionVariables = {
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
@@ -187,7 +173,7 @@ in
     };
     sessionPath = [
       "$HOME/.local/bin"
-      "$HOME/nixos/home/shared/scripts"
+      "$HOME/nixos/home/scripts"
     ];
   };
 }

@@ -5,5 +5,5 @@
     enable = true;
     package = pkgs.rofi-wayland;
   };
-  xdg.configFile."rofi/config.rasi".text = lib.readFile(./rofi.conf);
+  xdg.configFile."rofi/config.rasi".text = lib.readFile(./rofi-dracula.conf);
 }
