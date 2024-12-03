@@ -1,0 +1,12 @@
+bbenoist.nix
+dracula-theme.theme-dracula
+eamodio.gitlens
+gruntfuggly.todo-tree
+james-yu.latex-workshop
+jnoortheen.nix-ide
+ms-vscode.cmake-tools
+ms-vscode.cpptools
+ms-vscode.cpptools-extension-pack
+ms-vscode.cpptools-themes
+twxs.cmake
+yzhang.markdown-all-in-one

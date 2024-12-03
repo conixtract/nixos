@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  colors = import ../shared/rose.nix { };
+  colors = import ../colors/rose.nix { };
 in
 {
   # some general info  
@@ -14,6 +14,7 @@ in
   imports = [
     (import ./config/hyprland/default.nix)
     (import ./config/rofi/default.nix { inherit config pkgs colors lib; })
+    (import ./config/vscode/default.nix)
   ];
 
   wayland.windowManager.sway.enable = true;
@@ -53,29 +54,6 @@ in
         "--enable-wayland-clipboard"
       ];
     };
-    vscode = {
-      enable = true;
-      # package = pkgs.vscode.fhsWithPackages (ps: with ps; [
-      #   pkg-config
-      #   gnumake
-      #   clang
-      #   cmake
-      #   eigen
-      #   xorg.libX11
-      #   xorg.libXrandr
-      #   xorg.libXinerama
-      #   xorg.libXcursor
-      #   xorg.libXi
-      #   xorg.libXext
-      #   libGLU
-      #   wayland-scanner
-      #   wayland
-      #   libxkbcommon
-      #   libffi
-      #   gdb
-      #   meshlab
-      # ]);
-    };
     waybar = {
       enable = true;
       systemd.enable = false;
@@ -104,7 +82,7 @@ in
       upgrade = "nix-channel --update && sudo nixos-rebuild switch --upgrade";
       take-out-trash = "sudo nix-collect-garbage --delete-older-than 5d";
       open = "xdg-open";
-      vpn = "openconnect --authenticate -v vpn.rwth-aachen.de --useragent=AnyConnect -b --authgroup=\"RWTH-VPN (Full Tunnel)\" --user=\"fx245575\"";
+      vpn = "sudo openconnect -v vpn.rwth-aachen.de --useragent=AnyConnect -b --authgroup=\"RWTH-VPN (Full Tunnel)\" --user=\"fx245575\"";
       koki = "cd ~/dev/KoKi-Website/ && nix-shell shell.nix";
       connect-koch-vpn = "sudo swanctl --load-all --file ~/.config/strongswan/swanctl.conf && sudo swanctl --initiate --child net";
       disconnect-koch-vpn = "sudo swanctl --terminate net && sudo systemctl restart strongswan";

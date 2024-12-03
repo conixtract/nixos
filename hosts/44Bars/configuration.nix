@@ -67,7 +67,6 @@ in
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-
   programs = {
     hyprland.enable = true;
     sway.enable = true;
@@ -111,7 +110,7 @@ in
   console.keyMap = "de";
   programs.zsh.enable = true;
 
-  home-manager.users.forestgump = import ../../home/forestgump/home.nix;
+  home-manager.users.forestgump = import ../../home/home.nix;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.forestgump = {
@@ -125,10 +124,13 @@ in
   nixpkgs.config.allowUnfree = true;
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "DroidSansMono" "Iosevka" "CascadiaCode" "JetBrainsMono" ]; })
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.iosevka
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.jetbrains-mono
     dejavu_fonts
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
   ];
 

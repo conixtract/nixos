@@ -1,8 +1,5 @@
 {
     "editor.defaultFormatter": "ms-vscode.cpptools",
-    "prettier.bracketSameLine": true,
-    "prettier.tabWidth": 4,
-    "prettier.useTabs": true,
     "workbench.preferredDarkColorTheme": "Dracula",
     "C_Cpp.autocompleteAddParentheses": true,
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
@@ -215,5 +212,9 @@
             "TODO",
             "todo"
         ]
-    }
+    },
+    "workbench.activityBar.location": "top",
+    "window.commandCenter": false,
+    "workbench.layoutControl.enabled": false
+    
 }
