@@ -48,6 +48,11 @@ in
   };
 
   programs = {
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
     chromium = {
       enable = true;
       commandLineArgs = [
@@ -163,6 +168,8 @@ in
       texlive.combined.scheme-full
       swaybg
       i3status
+      acpi
+      alsa-utils
     ];
     sessionVariables = {
       ELECTRON_OZONE_PLATFORM_HINT = "auto";

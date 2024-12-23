@@ -139,7 +139,6 @@ in
   environment.systemPackages = with pkgs; [
     git
     keepassxc
-    direnv
     brightnessctl
     libsForQt5.qt5.qtgraphicaleffects
     libsecret
