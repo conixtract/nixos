@@ -6,12 +6,13 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       (fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")
     ];
 
-  nix.nixPath = [ 
+  nix.nixPath = [
     "nixos-config=/home/admin/nixos/hosts/home-server/configuration.nix"
     "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
     "/nix/var/nix/profiles/per-user/root/channels"
@@ -23,13 +24,13 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "home-server"; # Define your hostname.
-  
+
   # Enable networking
   networking.networkmanager.enable = true;
 
- # networking.interfaces.enp3s0.wakeOnLan = {
- #   enable = true;
- # };
+  # networking.interfaces.enp3s0.wakeOnLan = {
+  #   enable = true;
+  # };
   # The services doesn't actually work atm, define an additional service
   # see https://github.com/NixOS/nixpkgs/issues/91352
   /* systemd.services.wakeonlan = {
@@ -51,7 +52,7 @@
   };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
 
@@ -74,7 +75,7 @@
     open = true;
 
     # Enable the Nvidia settings menu,
-	  # accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
@@ -82,14 +83,14 @@
   };
 
   # sound with pipewire
-    services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        # If you want to use JACK applications, uncomment this
-        jack.enable = true;
-    };
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    jack.enable = true;
+  };
 
 
   # Set your time zone.
@@ -123,8 +124,8 @@
 
     displayManager.lightdm.enable = true;
     displayManager.sddm.enable = false;
-    displayManager.defaultSession = "plasma"; 
- };
+    displayManager.defaultSession = "plasma";
+  };
 
   # Configure console keymap
   console.keyMap = "de";
@@ -133,8 +134,8 @@
   users.users.admin = {
     isNormalUser = true;
     description = "admin";
-    extraGroups = [ "networkmanager" "wheel" "root" "audio"];
-    packages = with pkgs; [];
+    extraGroups = [ "networkmanager" "wheel" "root" "audio" ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -154,6 +155,21 @@
     alsa-utils
     texlive.combined.scheme-full
   ];
+
+  environment.etc = {
+    "gitconfig".text = ''
+      [ alias ]
+        lg = lg1
+        lg1 = lg1-specific --all
+        lg2 = lg2-specific --all
+        lg3 = lg3-specific --all
+
+        lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+        lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+        lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+    '';
+  };
+
 
   services.vscode-server.enable = true;
   services.x2goserver.enable = true;
