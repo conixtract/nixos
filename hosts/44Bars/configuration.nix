@@ -85,8 +85,8 @@ in
     enable = true; # naming is just weird, this does not enable x11
 
     displayManager.gdm = {
-        enable = true;
-        wayland = true; # Ensure GDM is using Wayland
+      enable = true;
+      wayland = true; # Ensure GDM is using Wayland
     };
     desktopManager = {
       xterm.enable = false;
@@ -101,6 +101,7 @@ in
   };
 
   hardware.graphics.enable = true;
+
   # power management
   powerManagement.enable = true;
   services.tlp = {
@@ -150,7 +151,7 @@ in
     # dancing-script # for sddm
     # themes.sddm-sugar-dark # for sddm
   ];
-  
+
   security.pam.services.gdm.enableGnomeKeyring = true;
   services.gnome.gnome-keyring.enable = true;
 
