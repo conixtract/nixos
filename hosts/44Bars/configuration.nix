@@ -46,6 +46,11 @@ in
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+  '';
+
+
   # audio
   services.pipewire = {
     enable = true;
