@@ -79,7 +79,10 @@ in
     enable = true;
     autosuggestion.enable = true;
     enableCompletion = true;
-    initExtra = "eval \"$(direnv hook zsh)\"";
+    initExtra = ''
+      eval "$(direnv hook zsh)"
+      LFCD=${HOME}/nixos/home/scripts/lfcd.sh
+    '' + builtins.readFile ./scripts/lfcd.sh;
 
     shellAliases = {
       la = "ls -a -l -h";
@@ -122,6 +125,11 @@ in
     source = ./config/sway/sway.conf;
   };
 
+  xdg.mimeApps.defaultApplications = {
+    "inode/directory" = [ "lf.desktop" ];
+  };
+
+
   # virtualiztion
   # dconf.settings = {
   #   "org/virt-manager/virt-manager/connections" = {
@@ -158,7 +166,7 @@ in
         '';
       }))
       spotify
-      nemo
+      lf
       libqalculate
       element-desktop
       killall
