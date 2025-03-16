@@ -16,11 +16,11 @@ while true; do
             sleep 180
         elif [[ "$CHARGE" -le 40 ]]; then
             notify-send "Battery discharging" "Battery is at ${CHARGE}%."
-            sleep 300
+            sleep 900
         else
-            sleep 600
+            sleep 1200
         fi
     else
-        sleep 600
+        sleep 1800
     fi
 done
