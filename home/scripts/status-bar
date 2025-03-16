@@ -34,7 +34,7 @@ get_cpu() {
     cpu_usage=$((100 * (total_diff - idle_diff) / total_diff))
 
     # Return result
-    echo "$cpu_usage%"
+    echo " $cpu_usage%"
 }
 
 # Get Date + Time
