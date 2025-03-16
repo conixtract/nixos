@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   colors = import ../colors/rose.nix { };
+  HOME = builtins.getEnv "HOME";
 in
 {
   # some general info  
@@ -22,17 +23,17 @@ in
 
   # dropbox setup from https://nixos.wiki/wiki/Dropbox
   systemd.user.services.dropbox = {
-      Unit = {
-        Description = "Dropbox service";
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-      Service = {
-        ExecStart = "${pkgs.dropbox}/bin/dropbox";
-        Restart = "on-failure";
-      };
+    Unit = {
+      Description = "Dropbox service";
     };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.dropbox}/bin/dropbox";
+      Restart = "on-failure";
+    };
+  };
 
   services.swaync.enable = true;
 
@@ -53,12 +54,15 @@ in
       enableZshIntegration = true;
       nix-direnv.enable = true;
     };
-    chromium = {
+    # chromium = {
+    #   enable = true;
+    #   commandLineArgs = [
+    #     "--ozone-platform-hint=auto"
+    #     "--enable-wayland-clipboard"
+    #   ];
+    # };
+    firefox = {
       enable = true;
-      commandLineArgs = [
-        "--ozone-platform-hint=auto"
-        "--enable-wayland-clipboard"
-      ];
     };
     waybar = {
       enable = true;
@@ -73,6 +77,10 @@ in
       enable = true;
       settings = { };
     };
+  };
+
+  programs.java = {
+    enable = true;
   };
 
   programs.zsh = {
@@ -94,7 +102,7 @@ in
       vpn = "sudo openconnect -v vpn.rwth-aachen.de --useragent=AnyConnect -b --authgroup=\"RWTH-VPN (Full Tunnel)\" --user=\"fx245575\"";
       koki = "cd ~/dev/KoKi-Website/ && nix-shell shell.nix";
       connect-koch-vpn = "sudo swanctl --load-all --file ~/.config/strongswan/swanctl.conf && sudo swanctl --initiate --child net";
-      disconnect-koch-vpn = "sudo swanctl --terminate net && sudo systemctl restart strongswan";
+      disconnect-koch-vpn = "sudo swanctl --terminate --child net && sudo systemctl restart strongswan";
       nix = "code ~/nixos";
       hiwi = "cd ~/dev/mesh-kernel && nix-shell shell.nix";
     };
@@ -165,6 +173,8 @@ in
       # ".config/i3/config".source = ../pk/config/i3/config;
     };
     packages = with pkgs; [
+      remmina
+      floorp
       wl-clipboard
       hyprshot
       nixpkgs-fmt
@@ -199,11 +209,12 @@ in
       i3status
       acpi
       alsa-utils
+      htop
     ];
     sessionVariables = {
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
       EDITOR = "code";
-      BROWSER = "chromium";
+      BROWSER = "floorp";
       TERMINAL = "alacritty";
       garden = "$HOME/Dropbox/digital-garden/";
     };
